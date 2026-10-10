@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Domain Storytelling</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%232b6cb0' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='6' cy='7' r='3'/%3E%3Ccircle cx='18' cy='17' r='3'/%3E%3Cpath d='M9 7h4a3 3 0 0 1 3 3v4'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="src/styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">Domain Storytelling</div>
+    <label class="select-wrap" title="Load a sample story">
+      <select id="samples" aria-label="Samples"><option value="">Samples…</option></select>
+    </label>
+    <button id="btn-tutorial" title="Step-by-step tutorials">Tutorials</button>
+    <button id="btn-help" title="Syntax and icon reference">Help</button>
+    <span class="spacer"></span>
+    <button id="btn-undo" title="Undo (Ctrl+Z)" aria-label="Undo">↶</button>
+    <button id="btn-redo" title="Redo (Ctrl+Y)" aria-label="Redo">↷</button>
+    <button id="btn-layout" title="Clear positions and lay out left to right in story order">Auto layout</button>
+    <button id="btn-force" class="toggle" aria-pressed="false" title="Live force-directed layout">Force</button>
+    <button id="btn-assumptions" class="toggle" aria-pressed="true" title="Show or hide the assumptions list" disabled>Assumptions <span class="count">0</span></button>
+    <button id="btn-comments" class="toggle" aria-pressed="true" title="Show or hide the comments list" disabled>Comments <span class="count">0</span></button>
+    <button id="btn-fit" title="Zoom to fit">Fit</button>
+    <button id="btn-play" title="Play the story one sentence at a time">▶ Play</button>
+    <button id="btn-share" title="Copy a link containing this story">Share</button>
+    <details class="menu" id="export-menu">
+      <summary>Export</summary>
+      <div class="menu-items">
+        <button data-export="text">Story text (.story)</button>
+        <button data-export="svg">SVG image</button>
+        <button data-export="png">PNG image</button>
+      </div>
+    </details>
+  </header>
+
+  <main>
+    <section id="editor-panel" aria-label="Story definition">
+      <div class="panel-head"><span>Story</span><button id="btn-collapse" title="Hide editor" aria-label="Hide editor">«</button></div>
+      <textarea id="editor" spellcheck="false" wrap="off" autocomplete="off" aria-label="Story text"></textarea>
+      <ul id="errors" aria-live="polite"></ul>
+    </section>
+
+    <section id="canvas-wrap">
+      <button id="btn-expand" title="Show editor" aria-label="Show editor" hidden>»</button>
+      <div id="story-title"></div>
+      <svg id="canvas" role="img" aria-label="Domain story diagram"></svg>
+      <div id="playbar" hidden>
+        <button id="play-prev" aria-label="Previous step">◀</button>
+        <button id="play-auto" aria-label="Auto-play">▶</button>
+        <button id="play-next" aria-label="Next step">▶|</button>
+        <div class="play-text"><span id="play-count"></span><span id="play-sentence"></span></div>
+        <button id="play-exit" aria-label="Exit play mode">×</button>
+      </div>
+    </section>
+
+    <aside id="side-panel" aria-label="Assumptions and comments" hidden>
+      <section id="sec-assumptions" class="side-section assumptions" hidden>
+        <h2>Assumptions</h2>
+        <ol></ol>
+      </section>
+      <section id="sec-comments" class="side-section comments" hidden>
+        <h2>Comments</h2>
+        <ol></ol>
+      </section>
+    </aside>
+  </main>
+  <div id="toast" role="status" hidden></div>
+
+  <script src="vendor/d3.min.js"></script>
+  <script type="module" src="src/main.js"></script>
+</body>
+</html>
